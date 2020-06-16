@@ -150,7 +150,7 @@ export default {
       headers
     });
   },
-  delelteUser(params) {
+  deleteUser(params) {
     return http.delete(`${apiUrl}/User/${params}`, {
       headers
     });
