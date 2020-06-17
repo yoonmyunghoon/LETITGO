@@ -20,31 +20,23 @@
             :key="`first${idx}`"
             :style="btnFlag === menu.title ? btnStyle[0] : btnStyle[1]"
           >
-            <i :class="menu.icon"></i>&nbsp;{{ menu.title }}
+            <i :class="menu.icon">&nbsp;{{ menu.title }}</i>
           </button>
           <hr id="divied_line" v-if="currentState === 2" />
           <div v-if="currentState === 2" class="sub_menu">
             <div
-              class="sub_menu_tab"
+              class="fas fa-scroll sub_menu_tab"
               @click="setSubState(1)"
               :style="subState === 1 ? btnStyle[0] : btnStyle[1]"
             >
-              <i class="fas fa-scroll" style="display: inline-block;"></i>
-              &nbsp;
-              <div style="display: inline-block;">
-                설계도
-              </div>
+              설계도
             </div>
             <div
-              class="sub_menu_tab2"
+              class="fas fa-cubes sub_menu_tab2"
               @click="setSubState(2)"
               :style="subState === 2 ? btnStyle[0] : btnStyle[1]"
             >
-              <i class="fas fa-cubes" style="display: inline-block;"></i>
-              &nbsp;
-              <div style="display: inline-block;">
-                부품
-              </div>
+              부품
             </div>
           </div>
         </div>
@@ -90,7 +82,6 @@ export default {
       menus: [
         { title: "설계도", icon: "fas fa-scroll" },
         { title: "좋아요", icon: "fas fa-heart" },
-        // { title: "부품", icon: "fas fa-cubes" },
         { title: "보관함", icon: "fas fa-archive" }
       ],
       currentState: 0,
@@ -156,7 +147,6 @@ export default {
 </script>
 
 <style scoped>
-/* 큰 레이아웃 */
 .whole_box {
   border-style: none;
   align-items: center;

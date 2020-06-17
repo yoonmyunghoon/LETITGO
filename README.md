@@ -250,3 +250,12 @@ src: 프로젝트에 사용되는 모든 `vue`파일이 모여있는 디렉토�
 - recommendation: 서버에 적용할 알고리즘을 테스트 해 본 파일들을 모아둔 곳입니다.
 - static: python manage.py collectstatic 명령을 통해 생성된 파일들이 모여있는 곳입니다. 배포환경에서 정적 파일들을 제공하기 위해 사용됩니다.
 
+## Reference
+
+### 레고 설계도 및 부품 데이터
+
+https://rebrickable.com/
+
+### Classification Model
+
+- 모델 검증용 이미지: https://www.kaggle.com/pacogarciam3/lego-vs-generic-brick-image-recognition

@@ -16,7 +16,7 @@
           <label for="modal_ex_file2">현재 사진 삭제</label>
           <input type="button" id="modal_ex_file2" @click="cleanImg()" />
         </div>
-        <div class="profile_modal_menus3" @click="dialog=false">취소</div>
+        <div class="profile_modal_menus3" @click="dialog = false">취소</div>
       </v-card>
     </v-dialog>
   </div>
@@ -37,9 +37,10 @@ export default {
       let file = e.target.files[0];
       let reader = new FileReader();
       reader.onload = async a => {
+        a;
         that.dialog = false;
         this.$emit("loading");
-        await this.updateImg(a.target.result);
+        await this.updateImg(file);
         this.$emit("stop");
       };
       if (file) {

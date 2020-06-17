@@ -1,5 +1,4 @@
 import api from "../../api";
-// import router from "../../router";
 
 const state = {
   followingList: [],
@@ -73,6 +72,9 @@ const actions = {
     const append = params.append;
     const resp = await api.getUserModels(params).then(res => res.data);
     const models = resp.results.map(e => e);
+    models.map(model => {
+      model.images = model.images.split("|")[0];
+    });
     if (append) {
       commit("addUserModelList", models);
     } else {
@@ -85,6 +87,9 @@ const actions = {
     const append = params.append;
     const resp = await api.getUserLikeModels(params).then(res => res.data);
     const models = resp.results.map(e => e);
+    models.map(model => {
+      model.images = model.images.split("|")[0];
+    });
     if (append) {
       commit("addLikeModelList", models);
     } else {

@@ -34,16 +34,11 @@
     </div>
     <div class="home_card_imgs" v-else>
       <div class="slideshow_container">
-        <div
-          class="go_detail_btn"
-          @click="goDetail(id)"
-          :style="styleFlag ? matrixStyle[4] : instaStyle[4]"
-        >
-          상세보기
-        </div>
         <img
           src="../../assets/icons/no_img.jpg"
           :style="styleFlag ? matrixStyle[3] : instaStyle[3]"
+          @click="goDetail(id)"
+          class="no_img"
         />
       </div>
     </div>
@@ -246,28 +241,20 @@ export default {
           return;
         }
         var maxHeight = 0;
-        // var minHeight = 614;
         for (let i = 0; i < this.imageList.length; ++i) {
           var naturalHeight = document.getElementById(
             `slideImg-${i}-${this.idx}`
-          ).naturalHeight; // img 높이
+          ).naturalHeight;
           if (maxHeight < naturalHeight) {
             maxHeight = naturalHeight;
           }
-          // if (minHeight > naturalHeight) {
-          //   minHeight = naturalHeight;
-          // }
         }
         if (maxHeight > 614) {
           maxHeight = 614;
         }
-        // if (minHeight < 200) {
-        //   minHeight = 300;
-        // }
         for (let i = 0; i < this.imageList.length; ++i) {
           document.getElementById(`slideImg-${i}-${this.idx}`).style.height =
             String(maxHeight) + "px";
-          // String(minHeight) + "px";
         }
       } else {
         for (let i = 0; i < this.imageList.length; ++i) {
@@ -381,6 +368,9 @@ export default {
 }
 img {
   vertical-align: middle;
+}
+.no_img {
+  cursor: pointer;
 }
 .slideshow_container {
   position: relative;

@@ -59,7 +59,7 @@ const actions = {
   },
   async deleteModel({ commit }, params) {
     const resp = await api
-      .delelteModel(params)
+      .deleteModel(params)
       .then(res => res.data)
       .catch(err => err.response);
     if (resp === "삭제 완료") {
@@ -101,7 +101,7 @@ const actions = {
   },
   async deleteUser({ commit }, params) {
     const resp = await api
-      .delelteUser(params)
+      .deleteUser(params)
       .then(res => res.data)
       .catch(err => err.response);
     if (resp === "블럭 성공") {

@@ -139,7 +139,7 @@ export default {
       headers
     });
   },
-  delelteModel(params) {
+  deleteModel(params) {
     return http.delete(`${apiUrl}/LegoSet/${params}`, {
       headers
     });
@@ -150,7 +150,7 @@ export default {
       headers
     });
   },
-  delelteUser(params) {
+  deleteUser(params) {
     return http.delete(`${apiUrl}/User/${params}`, {
       headers
     });
@@ -181,7 +181,10 @@ export default {
     });
   },
   getModelsByUserBased(params) {
-    return http.get(`${apiUrl}/UserBasedRecommend`, { params, headers });
+    return http.get(`${apiUrl}/UserBasedRecommend`, {
+      params,
+      headers
+    });
   },
   setModelToInventory(params) {
     return http.post(`${apiUrl}/update_user_set_inventory`, params, {
@@ -194,10 +197,20 @@ export default {
     });
   },
   getModelsForInven(params) {
-    return http.get(`${apiUrl}/UserSet`, { params, headers });
+    return http.get(`${apiUrl}/UserSet`, {
+      params,
+      headers
+    });
   },
   resetLegoRail() {
-    const params = 'null'
-    return http.post(`${apiUrl}/update_user_set_inventory2`, params, { headers });
+    const params = "null";
+    return http.post(`${apiUrl}/update_user_set_inventory2`, params, {
+      headers
+    });
+  },
+  uploadImage(params) {
+    return http.post(`${apiUrl}/upload_image`, params, {
+      headers
+    });
   }
 };

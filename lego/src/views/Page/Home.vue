@@ -80,7 +80,8 @@ export default {
         margin: "30px auto",
         backgroundColor: "white"
       },
-      isMobile: false
+      isMobile: false,
+      homeState: 0
     };
   },
   computed: {
@@ -105,20 +106,25 @@ export default {
       }
     },
     async homeCate() {
-      await this.resetModels();
-      await this.resetPages();
-      const params = {
-        page: 1,
-        append: false
-      };
-      if (this.homeCate === 1) {
-        await this.getModels(params);
-      } else if (this.homeCate === 2) {
-        await this.getLikeModels(params);
-      } else if (this.homeCate === 3) {
-        await this.getRecommendModels(params);
-      }
-      this.loading = false;
+      const bodyContainer = document.querySelector("#home_body");
+      bodyContainer.classList.add("anim-out");
+      setTimeout(async () => {
+        await this.resetModels();
+        await this.resetPages();
+        const params = {
+          page: 1,
+          append: false
+        };
+        if (this.homeCate === 1) {
+          await this.getModels(params);
+        } else if (this.homeCate === 2) {
+          await this.getLikeModels(params);
+        } else if (this.homeCate === 3) {
+          await this.getRecommendModels(params);
+        }
+        bodyContainer.classList.remove("anim-out");
+        this.loading = false;
+      }, 300);
     }
   },
   async mounted() {
@@ -204,6 +210,12 @@ export default {
 #home_body {
   box-sizing: border-box;
   width: 100%;
+  opacity: 1;
+  transition: all 0.3s ease-out;
+}
+#home_body.anim-out {
+  opacity: 0;
+  transform: scale(0.9) translateY(40px);
 }
 #home_show {
   width: 120px;

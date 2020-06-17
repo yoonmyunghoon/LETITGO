@@ -1,6 +1,11 @@
 <template>
   <div>
     <div id="detail_side_box">
+      <div id="delete_box" v-if="checkUser === true">
+        <div id="delete_btn" @click="deleteBtn()">
+          <p id="btn_content">삭제</p>
+        </div>
+      </div>
       <div id="detail_side_desc">
         <div id="detail_side_title">
           <b>{{ setName }}</b>
@@ -47,36 +52,32 @@
             </div>
           </div>
         </div>
+        <div id="detail_side_bricks">
+          <div id="detail_side_brick">Own Key</div>
+          <div id="detail_side_part" @click="pkCopy()">
+            <b class="fontColor_green">{{ id }}</b>
+          </div>
+        </div>
       </div>
 
       <hr class="divide_line" />
 
       <div id="detail_side_number">
         <div id="detail_side_scores">
-          <div id="detail_side_score">
-            Score
-          </div>
-          <div id="detail_side_score_num">
-            {{ avgScore }}
-          </div>
+          <div id="detail_side_score">Score</div>
+          <div id="detail_side_score_num">{{ avgScore }}</div>
         </div>
         <div
           id="detail_side_likes"
           @click="pushLike()"
           v-if="likeFlag === false"
         >
-          <div id="detail_side_like">
-            Like
-          </div>
-          <div id="detail_side_like_num">
-            {{ likeCnt }}
-          </div>
+          <div id="detail_side_like">Like</div>
+          <div id="detail_side_like_num">{{ likeCnt }}</div>
         </div>
         <button id="detail_side_onlikes" @click="pushLike()" v-else>
           <i class="fas fa-heart">
-            <div id="detail_side_like_num_on">
-              {{ likeCnt }}
-            </div>
+            <div id="detail_side_like_num_on">{{ likeCnt }}</div>
           </i>
         </button>
       </div>
@@ -97,9 +98,7 @@
           v-if="is100 === true"
           @addInven="addModelToInven()"
         >
-          <div slot="add_inven">
-            보관함에 설계도 추가하기
-          </div>
+          <div slot="add_inven">보관함에 설계도 추가하기</div>
         </add-inven>
 
         <sub-inven
@@ -107,15 +106,12 @@
           v-if="isInven === true"
           @subInven="subModelToInven()"
         >
-          <div slot="sub_inven">
-            보관함에서 설계도 제거하기
-          </div>
+          <div slot="sub_inven">보관함에서 설계도 제거하기</div>
         </sub-inven>
       </div>
     </div>
     <video
       controls
-      autoplay
       muted
       width="100%"
       style="margin-top: 10px;"
@@ -210,7 +206,8 @@ export default {
       likeCnt: 0,
       is100: false,
       preprocedParts: [],
-      isInven: false
+      isInven: false,
+      checkUser: localStorage.getItem("pk") == this.userId ? true : false
     };
   },
   watch: {
@@ -332,7 +329,8 @@ export default {
       "onLike",
       "getUserPartsAll",
       "addInven",
-      "subInven"
+      "subInven",
+      "deleteModel"
     ]),
     ...mapActions("search", ["searchByDetail"]),
     goMypage() {
@@ -422,6 +420,20 @@ export default {
     },
     goFood() {
       window.open("https://i02d106.p.ssafy.io/");
+    },
+    pkCopy() {
+      var tempElem = document.createElement("textarea");
+      tempElem.value = this.id;
+      document.body.appendChild(tempElem);
+
+      tempElem.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempElem);
+      alert("고유번호가 복사 되었습니다.");
+    },
+    async deleteBtn() {
+      await this.deleteModel(this.id);
+      this.$router.push("/");
     }
   }
 };
@@ -431,6 +443,35 @@ export default {
 #detail_side_box {
   border: 3px solid gold;
   padding: 10px;
+  position: relative;
+}
+#delete_box {
+  width: 50px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  right: -53px;
+  color: white;
+  overflow: hidden;
+  text-align: center;
+  font-weight: bold;
+}
+#delete_btn {
+  width: 5px;
+  height: 40px;
+  background: red;
+  line-height: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+#delete_btn:hover {
+  width: 100%;
+}
+#btn_content {
+  display: none;
+}
+#delete_btn:hover #btn_content {
+  display: block;
 }
 .divide_line {
   border: 1px solid gold;

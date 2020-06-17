@@ -156,6 +156,7 @@ export default {
 <style scoped>
 .right_body_box {
   border-style: none;
+  width: 100%;
 }
 .all_box {
   width: 100%;

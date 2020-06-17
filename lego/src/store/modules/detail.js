@@ -1,5 +1,4 @@
 import api from "../../api";
-// import router from "../../router";
 
 const state = {
   model: {
@@ -14,7 +13,8 @@ const state = {
     user_id: 0,
     created_at: "",
     updated_at: "",
-    parts: []
+    parts: [],
+    sub_sets: []
   },
   reviews: [],
   myparts: [],
@@ -23,7 +23,10 @@ const state = {
 
 const actions = {
   async getModelDetail({ commit }, params) {
-    const resp = await api.getModelDetail(params).then(res => res.data);
+    let resp = await api.getModelDetail(params).then(res => res.data);
+    resp.sub_sets.map(sub => {
+      sub.images = sub.images.split("|")[0];
+    });
     commit("setModel", resp);
     commit("setReviews", resp.reviews);
   },
@@ -100,6 +103,10 @@ const actions = {
       .then(res => res.data)
       .catch(err => err.response);
     return resp;
+  },
+  async deleteModel({ commit }, params) {
+    commit;
+    await api.deleteModel(params);
   }
 };
 
