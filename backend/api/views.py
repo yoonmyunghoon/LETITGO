@@ -19,7 +19,6 @@ from sklearn.cluster import KMeans
 import hashlib
 from datetime import datetime
 import base64
-
 API_key = '08d368a0e1830b9fec088091be154133'
 headers = {
     'Authorization': 'key ' + API_key,
