@@ -1,6 +1,11 @@
 <template>
   <div>
     <div id="detail_side_box">
+      <div id="delete_box" v-if="checkUser === true">
+        <div id="delete_btn" @click="deleteBtn()">
+          <p id="btn_content">삭제</p>
+        </div>
+      </div>
       <div id="detail_side_desc">
         <div id="detail_side_title">
           <b>{{ setName }}</b>
@@ -30,9 +35,9 @@
         <div id="detail_side_themes">
           <div id="detail_side_theme">Theme</div>
           <div id="detail_side_theme_name">
-            <b class="fontColor_green" @click="searchTheme(theme)">
-              {{ themeName }}
-            </b>
+            <b class="fontColor_green" @click="searchTheme(theme)">{{
+              themeName
+            }}</b>
           </div>
         </div>
         <div id="detail_side_tags">
@@ -201,7 +206,8 @@ export default {
       likeCnt: 0,
       is100: false,
       preprocedParts: [],
-      isInven: false
+      isInven: false,
+      checkUser: localStorage.getItem("pk") == this.userId ? true : false
     };
   },
   watch: {
@@ -323,7 +329,8 @@ export default {
       "onLike",
       "getUserPartsAll",
       "addInven",
-      "subInven"
+      "subInven",
+      "deleteModel"
     ]),
     ...mapActions("search", ["searchByDetail"]),
     goMypage() {
@@ -423,6 +430,10 @@ export default {
       document.execCommand("copy");
       document.body.removeChild(tempElem);
       alert("고유번호가 복사 되었습니다.");
+    },
+    async deleteBtn() {
+      await this.deleteModel(this.id);
+      this.$router.push("/");
     }
   }
 };
@@ -432,6 +443,35 @@ export default {
 #detail_side_box {
   border: 3px solid gold;
   padding: 10px;
+  position: relative;
+}
+#delete_box {
+  width: 50px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  right: -53px;
+  color: white;
+  overflow: hidden;
+  text-align: center;
+  font-weight: bold;
+}
+#delete_btn {
+  width: 5px;
+  height: 40px;
+  background: red;
+  line-height: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+#delete_btn:hover {
+  width: 100%;
+}
+#btn_content {
+  display: none;
+}
+#delete_btn:hover #btn_content {
+  display: block;
 }
 .divide_line {
   border: 1px solid gold;

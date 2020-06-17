@@ -64,12 +64,10 @@ const actions = {
       for (let i = 0; i < state.imgUrl.length; ++i) {
         var formdata = new FormData();
         formdata.append("image", state.imgUrl[i]);
-        api.uploadImage(formdata)
-          .then(response => {
-            console.log(response)
-            modelImgUrls.push(response.data);
-            commit("setImage", modelImgUrls);
-          })
+        api.uploadImage(formdata).then(response => {
+          modelImgUrls.push(response.data);
+          commit("setImage", modelImgUrls);
+        });
       }
     } else if (params.step === 2) {
       commit("setDesc", params.descParams);
@@ -148,11 +146,6 @@ const actions = {
       params["part"][2],
       params["part"][0]
     ];
-    // for (let i = 0; i < state.pickedPartByImg.length; ++i) {
-    //   if (params["part"][0] === state.pickedPartByImg[i][2]) {
-    //     return;
-    //   }
-    // }
 
     if (params["isHave"] === true) {
       const temp = [];

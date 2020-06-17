@@ -33,6 +33,9 @@ const actions = {
       return false;
     }
     const models = resp.results.map(e => e);
+    models.map(model => {
+      model.images = model.images.split("|")[0];
+    });
     if (append) {
       commit("addModelList", models);
     } else {
